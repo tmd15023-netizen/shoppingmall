@@ -1,0 +1,19 @@
+{
+  "name": "shop-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shop demo monorepo",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev": "npm run dev --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "start": "npm start --prefix server",
+    "start:server": "npm start --prefix server",
+    "start:client": "npm start --prefix client",
+    "build:client": "npm run build --prefix client",
+    "heroku-postbuild": "npm install --prefix server --omit=dev"
+  }
+}

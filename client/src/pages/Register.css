@@ -1,0 +1,214 @@
+.register {
+  min-height: 100vh;
+  background: #fff;
+  color: #333;
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 13px;
+}
+
+.register__inner {
+  width: min(860px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 60px;
+}
+
+.register__breadcrumb {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  color: #888;
+  font-size: 12px;
+}
+
+.register__breadcrumb a {
+  color: #888;
+  text-decoration: none;
+}
+
+.register__breadcrumb a:hover {
+  color: #333;
+}
+
+.register__breadcrumb-sep {
+  color: #bbb;
+}
+
+.register__header {
+  border-bottom: 2px solid #222;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.register__header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+}
+
+.register__required-note {
+  margin: 10px 0 0;
+  text-align: right;
+  font-size: 12px;
+  color: #666;
+}
+
+.required {
+  color: #e11d48;
+  margin-right: 2px;
+}
+
+.register__table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid #ddd;
+}
+
+.register__table th,
+.register__table td {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+.register__table th {
+  width: 160px;
+  background: #fafafa;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+
+.register__table td {
+  background: #fff;
+}
+
+.register__table input[type='email'],
+.register__table input[type='password'],
+.register__table input[type='text'],
+.register__table input[type='tel'] {
+  width: 260px;
+  max-width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #222;
+  font-size: 13px;
+  outline: none;
+}
+
+.register__table input:focus {
+  border-color: #888;
+}
+
+.register__input--wide {
+  width: 100% !important;
+  max-width: 480px !important;
+}
+
+.register__hint {
+  margin: 8px 0 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.register__terms {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.register__terms-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.register__terms-item input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #333;
+}
+
+.register__error {
+  margin: 16px 0 0;
+  color: #e11d48;
+  font-size: 13px;
+  text-align: center;
+}
+
+.register__actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.register__submit,
+.register__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #bbb;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.register__submit {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.register__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.register__cancel:hover {
+  background: #eee;
+}
+
+@media (max-width: 640px) {
+  .register__table,
+  .register__table tbody,
+  .register__table tr,
+  .register__table th,
+  .register__table td {
+    display: block;
+    width: 100%;
+  }
+
+  .register__table th {
+    border-bottom: none;
+    padding-bottom: 6px;
+  }
+
+  .register__table td {
+    padding-top: 0;
+  }
+
+  .register__table input[type='email'],
+  .register__table input[type='password'],
+  .register__table input[type='text'],
+  .register__table input[type='tel'] {
+    width: 100%;
+  }
+}

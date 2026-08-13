@@ -1,0 +1,228 @@
+.order-complete {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px 72px;
+  background: #fafafa;
+  color: #1a1a1a;
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  box-sizing: border-box;
+}
+
+.order-complete__inner {
+  width: 100%;
+  max-width: 560px;
+  text-align: center;
+}
+
+.order-complete__check {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #7dcf9a;
+  color: #fff;
+}
+
+.order-complete__inner h1 {
+  margin: 0 0 14px;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.order-complete__thanks {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.5;
+}
+
+.order-complete__message {
+  margin: 0 0 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.order-complete__delivery-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
+.order-complete__info {
+  text-align: left;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.order-complete__info-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #222;
+}
+
+.order-complete__info-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.order-complete__meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #efefef;
+}
+
+.order-complete__meta span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #999;
+}
+
+.order-complete__meta strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+  word-break: break-all;
+}
+
+.order-complete__products {
+  list-style: none;
+  margin: 0;
+  padding: 16px 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order-complete__products li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.order-complete__thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f3f3f3;
+  border: 1px solid #eee;
+}
+
+.order-complete__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.order-complete__product-name {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+}
+
+.order-complete__product-option,
+.order-complete__product-price {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.order-complete__product-price {
+  margin-top: 4px;
+  color: #444;
+  font-weight: 600;
+}
+
+.order-complete__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #efefef;
+  font-size: 14px;
+}
+
+.order-complete__total strong {
+  font-size: 18px;
+  color: #222;
+}
+
+.order-complete__empty-info {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.5;
+}
+
+.order-complete__actions {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.order-complete__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 132px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid #222;
+  background: #fff;
+  color: #222;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.order-complete__btn:hover {
+  background: #222;
+  color: #fff;
+}
+
+@media (max-width: 520px) {
+  .order-complete__meta {
+    grid-template-columns: 1fr;
+  }
+
+  .order-complete__actions {
+    width: 100%;
+  }
+
+  .order-complete__btn {
+    flex: 1;
+    min-width: 0;
+  }
+}
