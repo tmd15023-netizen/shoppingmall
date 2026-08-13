@@ -10,7 +10,7 @@
     "dev": "npm run dev --prefix server",
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
-    "start": "npm start --prefix server",
+    "start": "node server/src/index.js",
     "start:server": "npm start --prefix server",
     "start:client": "npm start --prefix client",
     "build:client": "npm run build --prefix client",
