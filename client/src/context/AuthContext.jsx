@@ -12,25 +12,11 @@ import {
   getStoredUser,
   getToken,
   isLoggedIn,
+  isTokenExpired,
   setStoredUser,
 } from '../utils/auth'
 
 const AuthContext = createContext(null)
-
-async function resolveUser() {
-  if (!isLoggedIn()) {
-    return null
-  }
-
-  const stored = getStoredUser()
-  if (stored) return stored
-
-  try {
-    return await fetchMe()
-  } catch {
-    return null
-  }
-}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => (isLoggedIn() ? getStoredUser() : null))
@@ -66,49 +52,56 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     let cancelled = false
 
-    resolveUser()
-      .then((nextUser) => {
-        if (cancelled) return
-        if (nextUser) setStoredUser(nextUser)
-        setUser(nextUser)
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false)
-      })
+    const applyLoggedOut = () => {
+      if (cancelled) return
+      setUser(null)
+      setLoading(false)
+    }
+
+    // 마운트 시 서버에서 유저 재확인 (스토리지만 믿지 않음)
+    refreshUser().finally(() => {
+      if (!cancelled) setLoading(false)
+    })
 
     const onAuthChanged = () => {
       if (!isLoggedIn()) {
-        setUser(null)
-        setLoading(false)
+        applyLoggedOut()
         return
       }
 
       const stored = getStoredUser()
-      if (stored) {
+      if (stored && !cancelled) {
         setUser(stored)
         setLoading(false)
       }
 
-      fetchMe()
-        .then((me) => {
-          if (cancelled) return
-          setStoredUser(me)
-          setUser(me)
-        })
-        .catch(() => {
-          if (!cancelled) setUser(null)
-        })
+      refreshUser()
+    }
+
+    const onFocus = () => {
+      const token = getToken()
+      if (!token || isTokenExpired(token)) {
+        if (token) clearAuth()
+        applyLoggedOut()
+        return
+      }
+
+      if (!getStoredUser()) {
+        refreshUser()
+      }
     }
 
     window.addEventListener('auth-changed', onAuthChanged)
     window.addEventListener('storage', onAuthChanged)
+    window.addEventListener('focus', onFocus)
 
     return () => {
       cancelled = true
       window.removeEventListener('auth-changed', onAuthChanged)
       window.removeEventListener('storage', onAuthChanged)
+      window.removeEventListener('focus', onFocus)
     }
-  }, [])
+  }, [refreshUser])
 
   const logout = useCallback(() => {
     clearAuth()

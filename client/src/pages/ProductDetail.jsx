@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getProductById } from '../api/productApi'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../hooks/useAuth'
 import { formatPrice } from '../data/products'
-import { isLoggedIn } from '../utils/auth'
 import './ProductDetail.css'
 
 const SIZE_OPTIONS = ['FREE', 'S', 'M', 'L']
@@ -66,6 +66,7 @@ function getDiscount(product) {
 function ProductDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuth()
   const { addItem } = useCart()
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -344,7 +345,7 @@ function ProductDetail() {
       return
     }
 
-    if (!isLoggedIn()) {
+    if (!user) {
       alert('로그인 후 장바구니에 담을 수 있습니다.')
       navigate('/login')
       return

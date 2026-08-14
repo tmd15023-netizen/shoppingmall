@@ -49,11 +49,23 @@ export function getStoredUser() {
   }
 }
 
+function parseJwtPayload(token) {
+  const payloadPart = String(token).split('.')[1]
+  if (!payloadPart) {
+    throw new Error('Invalid token')
+  }
+
+  // JWT는 base64url 이므로 atob 전에 변환
+  const base64 = payloadPart.replace(/-/g, '+').replace(/_/g, '/')
+  const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4)
+  return JSON.parse(atob(padded))
+}
+
 export function isTokenExpired(token = getToken()) {
   if (!token) return true
 
   try {
-    const payload = JSON.parse(atob(token.split('.')[1]))
+    const payload = parseJwtPayload(token)
     if (!payload.exp) return false
     return payload.exp * 1000 <= Date.now()
   } catch {

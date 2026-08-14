@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../api/authApi'
+import { useAuth } from '../hooks/useAuth'
 import './Login.css'
 
 function Login() {
   const navigate = useNavigate()
+  const { setUser, refreshUser } = useAuth()
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -30,6 +32,9 @@ function Login() {
         email: form.email.trim(),
         password: form.password,
       })
+
+      setUser(user)
+      await refreshUser()
 
       alert(`${user.name}님, 로그인되었습니다.`)
       navigate('/')
