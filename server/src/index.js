@@ -1,4 +1,5 @@
 const path = require("path");
+// 로컬: server/.env 사용. Heroku: Config Vars(process.env) 사용
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 const express = require("express");
