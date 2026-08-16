@@ -30,7 +30,13 @@ export async function request(path, { headers, ...options } = {}) {
   }
 
   if (!response.ok) {
-    throw new Error(data?.message || '요청에 실패했습니다.')
+    const fallback =
+      response.status === 404
+        ? 'API를 찾을 수 없습니다. Heroku에 최신 코드가 배포됐는지 확인해 주세요.'
+        : response.status === 401
+          ? '로그인이 만료되었거나 권한이 없습니다. 다시 로그인해 주세요.'
+          : '요청에 실패했습니다.'
+    throw new Error(data?.message || fallback)
   }
 
   return data

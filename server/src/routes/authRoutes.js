@@ -7,5 +7,6 @@ const router = express.Router();
 router.post("/login", login);
 router.get("/me", authMiddleware, getMe);
 router.patch("/me", authMiddleware, updateMe);
+router.put("/me", authMiddleware, updateMe);
 
 module.exports = router;

@@ -42,7 +42,7 @@ export async function updateMyProfile(payload) {
   }
 
   return request('/api/auth/me', {
-    method: 'PATCH',
+    method: 'PUT',
     headers: { Authorization: `Bearer ${token}` },
     body: JSON.stringify(payload),
   })
