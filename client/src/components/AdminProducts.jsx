@@ -115,20 +115,22 @@ function AdminProducts({ onRegistered }) {
       return
     }
 
+    const remaining = MAX_IMAGES - form.images.length
+
     setError('')
     setMessage('')
     setUploading(true)
 
     try {
       await openCloudinaryUploadWidget({
+        maxFiles: remaining,
         onSuccess: (imageUrl) => {
           setForm((prev) => {
             if (prev.images.length >= MAX_IMAGES) return prev
             if (prev.images.includes(imageUrl)) return prev
             return { ...prev, images: [...prev.images, imageUrl] }
           })
-          setMessage('이미지가 추가되었습니다.')
-          setUploading(false)
+          setMessage('선택한 이미지가 추가되었습니다.')
         },
         onError: (err) => {
           setError(err?.message || '이미지 업로드에 실패했습니다.')
@@ -376,7 +378,8 @@ function AdminProducts({ onRegistered }) {
               상품 이미지 * ({form.images.length}/{MAX_IMAGES})
             </span>
             <p className="admin-image-field__hint">
-              첫 번째 이미지가 대표 이미지로 사용됩니다. 최대 {MAX_IMAGES}장까지 추가할 수 있습니다.
+              첫 번째 이미지가 대표 이미지로 사용됩니다. 한 번에 여러 장을 선택해 업로드할 수 있으며, 최대{' '}
+              {MAX_IMAGES}장까지 등록됩니다.
             </p>
 
             <div className="admin-image-field__actions">
@@ -389,7 +392,7 @@ function AdminProducts({ onRegistered }) {
                 {uploading
                   ? '위젯 여는 중...'
                   : canAddMore
-                    ? '이미지 추가 업로드'
+                    ? '이미지 업로드 (여러 장 가능)'
                     : `최대 ${MAX_IMAGES}장까지 등록됨`}
               </button>
             </div>

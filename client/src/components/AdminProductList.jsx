@@ -132,8 +132,11 @@ function AdminProductList({ onGoRegister, onGoDashboard }) {
       return
     }
 
+    const remaining = MAX_IMAGES - editing.images.length
+
     try {
       await openCloudinaryUploadWidget({
+        maxFiles: remaining,
         onSuccess: (imageUrl) => {
           setEditing((prev) => {
             if (!prev || prev.images.length >= MAX_IMAGES) return prev
@@ -621,7 +624,7 @@ function AdminProductList({ onGoRegister, onGoDashboard }) {
                   onClick={handleAddEditImage}
                   disabled={editing.images.length >= MAX_IMAGES}
                 >
-                  이미지 추가
+                  이미지 추가 (여러 장 가능)
                 </button>
               </div>
               {editing.images.length > 0 ? (

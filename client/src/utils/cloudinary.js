@@ -45,6 +45,7 @@ export async function openCloudinaryUploadWidget({
   onSuccess,
   onError,
   onClose,
+  maxFiles = 6,
 } = {}) {
   if (!isCloudinaryConfigured()) {
     const missing = getMissingCloudinaryEnvKeys().join(', ')
@@ -53,6 +54,7 @@ export async function openCloudinaryUploadWidget({
     throw new Error(message)
   }
 
+  const allowedFiles = Math.max(1, Number(maxFiles) || 1)
   const { cloudName, uploadPreset } = cloudinaryEnv
   const cloudinary = await loadCloudinaryScript()
 
@@ -66,8 +68,8 @@ export async function openCloudinaryUploadWidget({
     {
       cloudName,
       uploadPreset,
-      multiple: false,
-      maxFiles: 1,
+      multiple: allowedFiles > 1,
+      maxFiles: allowedFiles,
       sources: ['local', 'url', 'camera'],
       resourceType: 'image',
       clientAllowedFormats: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
@@ -79,6 +81,7 @@ export async function openCloudinaryUploadWidget({
         return
       }
 
+      // 여러 장 선택 시 파일마다 success 이벤트가 발생합니다.
       if (result?.event === 'success') {
         const imageUrl = result.info?.secure_url || result.info?.url || ''
         if (imageUrl) {

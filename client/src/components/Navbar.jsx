@@ -55,6 +55,14 @@ function Navbar() {
                     </button>
                     {menuOpen && (
                       <div className="navbar__dropdown" role="menu">
+                        <Link
+                          to="/profile"
+                          className="navbar__dropdown-item"
+                          role="menuitem"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          회원정보 수정
+                        </Link>
                         <button
                           type="button"
                           className="navbar__dropdown-item"

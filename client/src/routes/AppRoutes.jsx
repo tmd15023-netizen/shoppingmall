@@ -11,6 +11,7 @@ import OrderComplete from '../pages/OrderComplete'
 import OrderFail from '../pages/OrderFail'
 import MyOrders from '../pages/MyOrders'
 import OrderDetail from '../pages/OrderDetail'
+import Profile from '../pages/Profile'
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/order-fail" element={<OrderFail />} />
         <Route path="/orders" element={<MyOrders />} />
         <Route path="/orders/:id" element={<OrderDetail />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
       </Route>

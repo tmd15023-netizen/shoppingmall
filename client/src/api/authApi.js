@@ -32,3 +32,18 @@ export async function fetchMe() {
     throw error
   }
 }
+
+export async function updateMyProfile(payload) {
+  const token = getToken()
+
+  if (!token || isTokenExpired(token)) {
+    clearAuth()
+    throw new Error('토큰이 만료되었습니다. 다시 로그인해 주세요.')
+  }
+
+  return request('/api/auth/me', {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  })
+}
